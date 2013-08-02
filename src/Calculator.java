@@ -12,49 +12,59 @@ public class Calculator {
     public static final char MULTIPLY = '*';
     public static final char ADDITION = '+';
     private static int NOT_FOUND = -1;
-    public int getNumber(String input,Integer startPosition){
+
+    public int getNumber(String input, Integer startPosition) {
         StringBuffer numberInString = new StringBuffer();
         int i;
-        for(i=startPosition;i<input.length() && Character.isDigit(input.charAt(i));i++){
+        for (i = startPosition; i < input.length() && Character.isDigit(input.charAt(i)); i++) {
             numberInString.append(input.charAt(i));
         }
-        startPosition = i;
         try {
             return Integer.parseInt(numberInString.toString());
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return NOT_FOUND;
         }
     }
-    public int evaluate(String input){
 
-        Integer result=0;
-        int findPosition=0;
+    public int evaluate(String input) {
+
+        Integer result;
+        int findPosition = 0;
         char operation = getOperation(input);
-        for(int i=0;i<input.length();i++)
-        {
-            Integer number = getNumber(input,findPosition);
+        result = getInitialValue(operation);
+        for (int i = 0; i < input.length(); i++) {
+            Integer number = getNumber(input, findPosition);
             findPosition += getNextPosition(number);
-            if(number==NOT_FOUND) {
-                         break;
+            if (number == NOT_FOUND) {
+                break;
             }
-            result = performOperation(result,number,operation);
+            result = performOperation(result, number, operation);
         }
         return result;
     }
 
+    private Integer getInitialValue(int operation) {
+        Integer result;
+        if (operation == MULTIPLY)
+            result = 1;
+        else
+            result = 0;
+        return result;
+    }
+
     private int getNextPosition(Integer number) {
-        return String.valueOf(number).length()+1;
+        return String.valueOf(number).length() + 1;
     }
 
     private char getOperation(String input) {
-        return input.charAt(input.length()-1);
+        return input.charAt(input.length() - 1);
     }
 
     public int performOperation(Integer result, Integer number, char operation) {
-        if(operation== ADDITION){
+        if (operation == ADDITION) {
             result = result + number;
         }
-        if(operation== MULTIPLY){
+        if (operation == MULTIPLY) {
             result = result * number;
         }
         return result;

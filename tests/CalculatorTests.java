@@ -65,12 +65,15 @@ public class CalculatorTests {
     public void testEvaluationOfFiftySixtyCommaSixtyPlusIsHunderedAndTen(){
         assertEquals(110,calculator.evaluate("50,60,+"));
     }
+    @Test
     public void testEvaluationOfFortyFiveCommaEightyNineCommaOnePlusIsOneHunderedThirtyFive(){
         assertEquals(135,calculator.evaluate("45,89,1,+"));
     }
+    @Test
     public void testEvaluationOfThreeDashFourDashSixDashAsterixIsSeventyTwo(){
         assertEquals(72,calculator.evaluate("3-4-6-*"));
     }
+    @Test
     public void testEvaluationOfThreeCommaFourDashSixDashAsterixIsSeventyTwo(){
         assertEquals(72,calculator.evaluate("3,4-6-*"));
     }
